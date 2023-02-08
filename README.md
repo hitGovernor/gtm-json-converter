@@ -1,18 +1,38 @@
 # gtm-json-converter
-This tool converts json GTM exports into xlsx or csv, and can be used to QA tags and triggers in your GTM account. 
+This tool converts json GTM exports into csv. It provides two export files:
+1. A full inventory of the key elements of the account
+  * Account ID
+  * Container ID
+  * Container Name
+  * Public Container ID
+  * Asset Category (folder, template, tag, trigger, variable)
+  * Asset ID
+  * Asset Name
+  * Asset Type
+  * Status ("paused" if disabled/paused)
+  * Consent Status
+  * Tag Firing Option
+  * Firing Trigger ID	
+  * Blocking Trigger ID
+  * Parameters
+  * Parent Folder ID
+  * Parent Folder Name
 
-Each row chains together variables that are associated within GTM, e.g. triggers that reside within a given tag.
+2. An breakout of each trigger assigned to each tag (great for evaluating where/how triggers are used)
+  * Account ID
+  * Container Name
+  * Tag ID
+  * Tag Name
+  * Status ("paused" if disabled/paused)
+  * Asset Category (folder, template, tag, trigger, variable)
+  * Asset Type
+  * Tag Firing Option
+  * Parent Library
+  * Parent Folder ID
+  * Parent Folder Name
+  * Firing Trigger ID
+  * Firing Trigger Name
+  * Blocking Trigger ID
+  * Blocking Trigger Name
 
-**Variables parsed from the json:** 
-* folder name
-* tag name
-* event category
-* event action
-* event label
-* triggers
-
-The UI allows you to select and download multiple files at once, but does not currently support separate naming for multiple files.
-
-Feel free to submit feature requests or pull requests to help build out this tool.
-
-Try it out! [catherine.work/gtm-json-converter](http://catherine.work/gtm-json-converter/)
+Try it out! [GTM Inventory!](http://sandbox.evolytics.com/b/gtm-inventory/)
