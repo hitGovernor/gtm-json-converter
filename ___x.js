@@ -64,13 +64,13 @@ let gtmHelper = {
         constructor() {
           this.account = item.ACCOUNTID;
           this.CONTAINERNAME = item.CONTAINERNAME;
+          this.PUBLICID = this. PUBLICID;
           this.tagId = item.assetId;
           this.tagName = item.assetName;
           this.status = item.status;
           this.assetCategory = item.assetCategory;
           this.assetType = item.assetType;
           this.tagFiringOption = item.tagFiringOption;
-          this.parentLibrary = item.parentLibrary;
           this.parentFolderId = item.parentFolderId;
           this.parentFolderName = item.parentFolderName;
           this.firingTriggerId = "";
@@ -108,7 +108,7 @@ let gtmHelper = {
     });
 
     console.log("GTM_AUDIT: TRIGGERS BY TAG", triggersByTag);
-    gtmHelper.download(gtmHelper.convertToCSV(triggersByTag), "by-loadrule");
+    gtmHelper.download(gtmHelper.convertToCSV(triggersByTag), "by-trigger");
   },
 
   /**
@@ -146,7 +146,7 @@ let gtmHelper = {
    */
   download: function (data, suffix) {
     account = gtmHelper.accountId || "";
-    let filename = 'gtm-inventory-' + account + ((suffix) ? "-" + suffix : "") + ".csv"
+    let filename = 'gtm-inventory_' + account + "_" + gtmHelper.publicId + ((suffix) ? "_" + suffix : "") + ".csv"
     const blob = new Blob([data], {
       type: 'text/csv'
     });
@@ -165,7 +165,7 @@ let gtmHelper = {
     let ACCOUNTID = gtmHelper.accountId = payload.containerVersion.container.accountId || "";
     let CONTAINERID = payload.containerVersion.container.containerId || "";
     let CONTAINERNAME = payload.containerVersion.container.name || "";
-    let PUBLICID = payload.containerVersion.container.publicId || "";
+    let PUBLICID = gtmHelper.publicId = payload.containerVersion.container.publicId || "";
     let assetCategorysToRetrieve = ["folder", "template", "tag", "trigger", "variable", "variable_builtin"];
     let retval = [];
 
@@ -211,29 +211,3 @@ let gtmHelper = {
     return retval;
   }
 }
-
-
-                        
-// gtmHelper.getAllAssets(gtm);
-
-// gtmHelper.tagsOnly = allGTMAssets.filter(function(item) {
-//   if (item.assetCategory === "tag") {
-//     return item;
-//   }
-// });
-   
-// gtmHelper.triggersOnly = allGTMAssets.filter(function(item) {
-//   if (item.assetCategory === "trigger") {
-//     return item;
-//   }
-// });
-
-// gtmHelper.variablesOnly = allGTMAssets.filter(function(item) {
-//   if (item.assetCategory === "variable" || item.assetCategory ===  "variable_builtin") {
-//     return item;
-//   }
-// });
-
-
-// gtmHelper.download(gtmHelper.convertToCSV(allGTMAssets), "full");
-// gtmHelper.getTriggersByTag(gtmHelper.tagsOnly, gtmHelper.triggersOnly);
